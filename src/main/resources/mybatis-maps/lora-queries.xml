@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lora">
+    <insert id="insertMessage">
+        INSERT INTO  lora_message (app_Id,	dev_Id, is_Retry, port, counter, payloadRaw, meta_time, meta_frequency, meta_modulation, meta_data_rate, meta_bit_rate, meta_coding_rate)
+        VALUES (#{appId}, #{devId}, #{isRetry}, #{port}, #{counter}, #{payloadRaw}, #{meta_time}, #{meta_frequency}, #{meta_modulation}, #{meta_data_rate}, #{meta_bit_rate}, #{meta_coding_rate})
+    </insert>
+
+    <insert id="insertMessageGtw">
+        INSERT INTO lora_message_gateway (msg_id, gtw_id, gtw_timestamp, gtw_time, gtw_channel, gtw_rssi, gtw_snr, gtw_rfchain, gtw_latitude, gtw_longitude, gtw_altitude)
+        VALUES (#{msg_id}, #{gtw_id}, #{gtw_timestamp}, #{gtw_time}, #{gtw_channel}, #{gtw_rssi}, #{gtw_snr}, #{gtw_rfchain}, #{gtw_latitude}, #{gtw_longitude}, #{gtw_altitude})
+    </insert>
+
+    <insert id="insertMessageTracker">
+        INSERT INTO lora_message_tracker (msg_id, latitude, longitude, roll, pitch, batv, alarm_status)
+        values ( #{msg_id}, #{Latitude}, #{Longitud}, #{Roll}, #{Pitch}, #{BatV}, #{ALARM_status})
+    </insert>
+
+    <select id="now" resultType="date">
+        select now()
+    </select>
+
+    <select id="lastId" resultType="long">
+        select last_insert_id()
+    </select>
+
+</mapper>
